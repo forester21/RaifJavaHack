@@ -2,10 +2,9 @@ package ru.javahack.izipay.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.javahack.izipay.pojo.Product;
 import ru.javahack.izipay.pojo.api.CountOfProducts;
-import ru.javahack.izipay.pojo.api.ProductsByCategory;
 import ru.javahack.izipay.service.CashBoxService;
-import ru.javahack.izipay.util.ProductUtils;
 import ru.javahack.izipay.util.TestData;
 
 import java.util.ArrayList;
@@ -22,9 +21,8 @@ public class CashBoxController {
     private CashBoxService cashBoxService;
 
     @GetMapping("/products")
-    public List<ProductsByCategory> getProductList() {
-        //TODO get real data
-        return ProductUtils.groupProductsByCategories(TestData.products());
+    public List<Product> getProductList() {
+        return TestData.products();
     }
 
     @PostMapping("/products")

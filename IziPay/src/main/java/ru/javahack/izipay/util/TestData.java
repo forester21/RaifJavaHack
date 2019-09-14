@@ -15,15 +15,10 @@ public class TestData {
     }
 
     public static Product milk() {
-        return new Product(1, "milk", new BigDecimal("1.5"), category());
+        return new Product(1, "milk", new BigDecimal("1.5"), 1);
     }
 
     public static Product juice() {
-        return new Product(2, "juice", new BigDecimal("2.5"), category());
-    }
-
-
-    public static ProductCategory category() {
-        return new ProductCategory(1, "food");
+        return new Product(2, "juice", new BigDecimal("2.5"), 2);
     }
 }
