@@ -1,0 +1,11 @@
+.container {
+  width: 45%;
+
+  .delete-icon {
+    color: #FF4D4F;
+
+    &:hover {
+      color: #cf1322;
+    }
+  }
+}
