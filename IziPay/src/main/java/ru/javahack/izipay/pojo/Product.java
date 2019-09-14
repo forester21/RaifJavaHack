@@ -14,13 +14,21 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-@AllArgsConstructor
-@Document
+@Document(collection = "products")
 public class Product {
+
+    public static final String SEQUENCE_NAME = "products_sequence";
+
     @Id
     private long id;
     private String name;
     private BigDecimal price;
-    @DBRef
+    private long userId;
     private long categoryId;
+
+    public Product(String name, BigDecimal price, long categoryId) {
+        this.name = name;
+        this.price = price;
+        this.categoryId = categoryId;
+    }
 }
