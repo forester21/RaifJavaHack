@@ -1,41 +1,34 @@
 import { batch } from 'react-redux';
 
+import * as api from 'api';
+
 export const PRODUCTS_LOADING = 'PRODUCTS_LOADING';
 export const PRODUCTS_LOADED = 'PRODUCTS_LOADED';
-export const loadProducts = () => dispatch => {
-  // api call
-
-  dispatch({
-    type: PRODUCTS_LOADED,
-    payload: [],
-  });
-};
 
 export const CATEGORIES_LOADING = 'CATEGORIES_LOADING';
 export const CATEGORIES_LOADED = 'CATEGORIES_LOADED';
-export const loadCategories = () => dispatch => {
-  // api call
-
-  dispatch({
-    type: CATEGORIES_LOADED,
-    payload: [],
-  });
-};
 
 export const loadProductsAndCategories = () => dispatch => {
-  // Promise all
+  const promises = [api.getProducts(), api.getCategories()];
+  Promise.all(promises)
+    .then(responses => Promise.all(responses.map(response => response.json())))
+    .then(results => {
+      batch(() => {
 
-  batch(() => {
-    dispatch({
-      type: CATEGORIES_LOADED,
-      payload: [],
-    });
+        console.log(results);
+        
+        dispatch({
+          type: PRODUCTS_LOADED,
+          payload: results[0],
+        });
 
-    dispatch({
-      type: PRODUCTS_LOADED,
-      payload: [],
+        dispatch({
+          type: CATEGORIES_LOADED,
+          payload: results[1],
+        });
+    
+      });
     });
-  });
 };
 
 export const DELETE_SELECTED_PRODUCT = 'DELETE_SELECTED_PRODUCT';
@@ -55,4 +48,13 @@ export const changeProductCount = (id, newValue) => dispatch => {
       newValue,
     },
   });
+};
+
+export const getQRCode = () => (dispatch, getState) => {
+  const productsIds = getState().selectedProducts.map(product => ({
+    id: product.key,
+    count: product.count,
+  }));
+
+  api.generateQRCode(productsIds);
 };

@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "proxy": "http://10.91.6.103:8080",
   "private": true,
   "dependencies": {
     "antd": "^3.23.2",

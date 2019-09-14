@@ -18,6 +18,13 @@ export default (state = initialState, action) => {
       };
     }
 
+    case Actions.CATEGORIES_LOADED: {
+      return {
+        ...state,
+        categories: action.payload,
+      };
+    }
+
     case Actions.DELETE_SELECTED_PRODUCT: {
       const restSelectedProducts = remove(
         state.selectedProducts,
