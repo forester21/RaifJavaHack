@@ -1,6 +1,7 @@
 package ru.javahack.izipay.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
@@ -10,13 +11,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class QrCodeSocketService {
 
-    //TODO вынести в проперти
-    public static final String TOPIC_ENDPOINT = "/topic/test";
+    @Value("${topicEndpoint}")
+    private String topicEndpoint;
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
     public void sendNotification() {
-        simpMessagingTemplate.convertAndSend(TOPIC_ENDPOINT, "");
+        simpMessagingTemplate.convertAndSend(topicEndpoint, "");
     }
 }

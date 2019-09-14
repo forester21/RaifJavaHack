@@ -12,7 +12,7 @@ import java.util.Map;
 @Service
 public class QrCodeStorage {
 
-    public static final String DEFAULT_IMAGE_PATH = "img/no-qr-code.png";
+    private static final String DEFAULT_IMAGE_PATH = "img/no-qr-code.png";
 
     private File defaultImage;
 

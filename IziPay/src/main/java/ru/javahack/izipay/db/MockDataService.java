@@ -10,6 +10,11 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+/**
+ * Заглушка для сервиса запросов в БД
+ *
+ * @author FORESTER
+ */
 @Component
 @Profile("Test")
 public class MockDataService implements DataService{

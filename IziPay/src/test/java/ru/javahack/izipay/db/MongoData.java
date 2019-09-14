@@ -1,17 +1,22 @@
-package ru.javahack.izipay;
+package ru.javahack.izipay.db;
 
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.javahack.izipay.db.DataService;
 import ru.javahack.izipay.pojo.Product;
 import ru.javahack.izipay.pojo.ProductCategory;
 
 import java.math.BigDecimal;
 
+import static org.junit.Assert.assertNotNull;
+
+/**
+ * @author FORESTER
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MongoData {
@@ -19,6 +24,10 @@ public class MongoData {
     @Autowired
     DataService dataService;
 
+
+    /**
+     * Наполнение тестовыми данными
+     */
     @Test
     @Ignore
     public void fillData() {
@@ -32,6 +41,6 @@ public class MongoData {
 
     @Test
     public void get() {
-        System.out.println(dataService.getAllProducts(1).get(0).getName());
+        assertNotNull(dataService.getAllProducts(1).get(0).getName());
     }
 }

@@ -1,5 +1,6 @@
 package ru.javahack.izipay.db;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Profile;
@@ -23,8 +24,9 @@ import static org.springframework.data.mongodb.core.query.Query.query;
 @Component
 @Profile("Prod")
 public class DataServiceImpl implements DataService {
-    private ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoConfig.class);
-    private MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
+
+    @Autowired
+    private MongoOperations mongoOperation;
 
     public ProductCategory addCategory(ProductCategory category) {
         category.setId(generateSequence(ProductCategory.SEQUENCE_NAME));

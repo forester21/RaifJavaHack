@@ -33,13 +33,13 @@ public class CashBoxController {
         return dataService.getAllProducts(userService.getUserId());
     }
 
-    @GetMapping("/categories")
-    public List<ProductCategory> getCategoriesList() {
-        return dataService.getAllCategories(userService.getUserId());
-    }
-
     @PostMapping("/products")
     public void submitProducts(@RequestBody ArrayList<CountOfProducts> chosenProducts) {
         cashBoxService.submitOrder(chosenProducts);
+    }
+
+    @GetMapping("/categories")
+    public List<ProductCategory> getCategoriesList() {
+        return dataService.getAllCategories(userService.getUserId());
     }
 }
