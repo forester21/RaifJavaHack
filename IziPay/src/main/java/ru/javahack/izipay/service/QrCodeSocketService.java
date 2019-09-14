@@ -16,7 +16,7 @@ public class QrCodeSocketService {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    public void updateQrCode() {
+    public void sendNotification() {
         simpMessagingTemplate.convertAndSend(TOPIC_ENDPOINT, "");
     }
 }

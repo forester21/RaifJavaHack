@@ -29,7 +29,7 @@ public class QrCodeGenerator {
     @Autowired
     private UserService userService;
 
-    public void generateQrCode(BigDecimal paymentAmount) {
+    public void updateQrCode(BigDecimal paymentAmount) {
         try {
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(generateURL(paymentAmount), BarcodeFormat.QR_CODE, 350, 350);
