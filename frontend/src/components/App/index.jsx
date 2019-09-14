@@ -10,11 +10,11 @@ import Logo from 'components/Logo';
 import Layout from 'components/Layout';
 import CashBox from 'components/CashBox';
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+export const ReduxStore = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 const App = () => (
   <>
-    <Provider store={store}>
+    <Provider store={ReduxStore}>
       <BrowserRouter>
         <Route path="/" component={Logo} />
         <Layout>

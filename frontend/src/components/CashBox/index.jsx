@@ -1,5 +1,11 @@
 import * as React from 'react';
 
-const CashBox = () => <div>lalala</div>;
+import SelectedProducts from 'components/SelectedProducts';
+
+const CashBox = () => (
+  <div>
+    <SelectedProducts />
+  </div>
+);
 
 export default CashBox;
