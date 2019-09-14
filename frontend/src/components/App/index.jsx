@@ -9,6 +9,7 @@ import reducer from 'reducers';
 import Logo from 'components/Logo';
 import Layout from 'components/Layout';
 import CashBox from 'components/CashBox';
+import QRCode from 'components/QRCode';
 
 export const ReduxStore = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -19,7 +20,8 @@ const App = () => (
         <Route path="/" component={Logo} />
         <Layout>
           <Switch>
-            <Route path="/" component={CashBox} />
+            <Route exact path="/" component={CashBox} />
+            <Route path="/qr" component={QRCode} />
           </Switch>
         </Layout>
       </BrowserRouter>
