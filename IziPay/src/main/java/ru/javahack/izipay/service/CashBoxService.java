@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.javahack.izipay.pojo.api.CountOfProducts;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -19,8 +20,17 @@ public class CashBoxService {
     private QrCodeGenerator qrCodeGenerator;
 
     public void submitOrder(List<CountOfProducts> products) {
-        //TODO добавить генерацию QR
+        qrCodeGenerator.generateQrCode(countPaymentAmount(products));
         socketService.updateQrCode();
-//        socketService.updateQrCode(qrCodeGenerator.generateQrCode(products));
+    }
+
+    public BigDecimal countPaymentAmount(List<CountOfProducts> products){
+        return products.stream()
+                .map(p -> getPriceByProductId(p.getId()).multiply(new BigDecimal(p.getCount())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private BigDecimal getPriceByProductId(long productId){
+        return new BigDecimal("33.5");
     }
 }

@@ -3,8 +3,10 @@ package ru.javahack.izipay.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
-import ru.javahack.izipay.util.TestData;
 
+/**
+ * @author FORESTER
+ */
 @Service
 public class QrCodeSocketService {
 
@@ -14,7 +16,7 @@ public class QrCodeSocketService {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    public void updateQrCode(){
-        simpMessagingTemplate.convertAndSend(TOPIC_ENDPOINT, TestData.category());
+    public void updateQrCode() {
+        simpMessagingTemplate.convertAndSend(TOPIC_ENDPOINT, "");
     }
 }
