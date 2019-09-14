@@ -4,9 +4,8 @@ const csrfToken = Cookies.get('csrftoken');
 
 const get = url => fetch(url);
 
-const post = (url, data) => {
-  console.log(data);
-  return fetch(url, {
+const post = (url, data) =>
+  fetch(url, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -14,10 +13,11 @@ const post = (url, data) => {
       'X-CSRFToken': csrfToken,
     },
   });
-};
 
 export const getProducts = () => get('/api/products');
 
 export const getCategories = () => get('/api/categories');
 
-export const generateQRCode = productsIds => post('/api/products', productsIds);
+export const requestGenerateQRCode = productsIds => post('/api/products', productsIds);
+
+export const getQRCode = () => get('/api/QR');
