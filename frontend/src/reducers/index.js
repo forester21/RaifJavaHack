@@ -7,6 +7,7 @@ const initialState = {
   products: [],
   categories: [],
   selectedProducts: mock,
+  QRCodeUrl: null,
 };
 
 export default (state = initialState, action) => {
@@ -46,6 +47,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         selectedProducts: [...state.selectedProducts],
+      };
+    }
+
+    case Actions.QR_CODE_LOADED: {
+      return {
+        ...state,
+        QRCodeUrl: action.payload,
       };
     }
 

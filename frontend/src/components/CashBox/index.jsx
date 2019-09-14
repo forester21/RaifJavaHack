@@ -2,17 +2,17 @@ import * as React from 'react';
 import Button from 'antd/es/button';
 import { connect } from 'react-redux';
 
-import { getQRCode } from 'actions';
+import { requestGenerateQRCode } from 'actions';
 import SelectedProducts from 'components/SelectedProducts';
 
 const mapDispatchToProps = dispatch => ({
-  getQRCode: () => dispatch(getQRCode()),
+  requestGenerateQRCode: () => dispatch(requestGenerateQRCode()),
 });
 
-const CashBox = ({ getQRCode }) => (
+const CashBox = ({ requestGenerateQRCode }) => (
   <div>
     <SelectedProducts />
-    <Button onClick={getQRCode}>GET QR CODE</Button>
+    <Button onClick={requestGenerateQRCode}>GET QR CODE</Button>
   </div>
 );
 

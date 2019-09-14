@@ -14,9 +14,6 @@ export const loadProductsAndCategories = () => dispatch => {
     .then(responses => Promise.all(responses.map(response => response.json())))
     .then(results => {
       batch(() => {
-
-        console.log(results);
-        
         dispatch({
           type: PRODUCTS_LOADED,
           payload: results[0],
@@ -26,7 +23,6 @@ export const loadProductsAndCategories = () => dispatch => {
           type: CATEGORIES_LOADED,
           payload: results[1],
         });
-    
       });
     });
 };
@@ -50,11 +46,26 @@ export const changeProductCount = (id, newValue) => dispatch => {
   });
 };
 
-export const getQRCode = () => (dispatch, getState) => {
+export const requestGenerateQRCode = () => (dispatch, getState) => {
   const productsIds = getState().selectedProducts.map(product => ({
     id: product.key,
     count: product.count,
   }));
 
-  api.generateQRCode(productsIds);
+  api.requestGenerateQRCode(productsIds);
+};
+
+export const QR_CODE_LOADED = 'QR_CODE_LOADED';
+export const getQRCode = () => dispatch => {
+  api
+    .getQRCode()
+    .then(res => res.blob())
+    .then(blob => {
+      const objectURL = URL.createObjectURL(blob);
+
+      dispatch({
+        type: QR_CODE_LOADED,
+        payload: objectURL,
+      });
+    });
 };
