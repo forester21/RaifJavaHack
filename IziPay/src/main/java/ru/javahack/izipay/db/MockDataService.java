@@ -47,10 +47,10 @@ public class MockDataService implements DataService{
     }
 
     public static ProductCategory food() {
-        return new ProductCategory(1, "food");
+        return new ProductCategory(1, "food", 1);
     }
 
     public static ProductCategory drinks() {
-        return new ProductCategory(2, "drinks");
+        return new ProductCategory(2, "drinks", 1);
     }
 }

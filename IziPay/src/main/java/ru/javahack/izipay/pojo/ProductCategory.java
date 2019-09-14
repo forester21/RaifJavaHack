@@ -1,9 +1,6 @@
 package ru.javahack.izipay.pojo;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,6 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "categories")
 public class ProductCategory {
 

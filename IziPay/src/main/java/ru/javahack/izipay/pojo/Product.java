@@ -2,6 +2,7 @@ package ru.javahack.izipay.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -15,6 +16,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Document(collection = "products")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
     public static final String SEQUENCE_NAME = "products_sequence";
@@ -23,7 +26,6 @@ public class Product {
     private long id;
     private String name;
     private BigDecimal price;
-    private long userId;
     private long categoryId;
 
     public Product(String name, BigDecimal price, long categoryId) {

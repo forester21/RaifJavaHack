@@ -2,6 +2,7 @@ package ru.javahack.izipay.db;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -20,6 +21,7 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
 
 @Component
+@Profile("Prod")
 public class DataServiceImpl implements DataService {
     private ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoConfig.class);
     private MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
