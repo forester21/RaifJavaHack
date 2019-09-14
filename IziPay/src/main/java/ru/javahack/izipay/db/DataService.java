@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface DataService {
     ProductCategory addCategory(ProductCategory category);
+    Product getProduct(long productId);
     Product addProduct(Product product);
     List<Product> getAllProducts(long userId);
     List<ProductCategory> getAllCategories(long userId);
