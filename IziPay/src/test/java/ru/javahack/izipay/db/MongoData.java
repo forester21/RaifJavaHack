@@ -33,10 +33,23 @@ public class MongoData {
     public void fillData() {
         ProductCategory cat1 = dataService.addCategory(new ProductCategory("Еда", 1));
         ProductCategory cat2 = dataService.addCategory(new ProductCategory("Напитки", 1));
-        dataService.addProduct(new Product("Борщ", new BigDecimal(55), cat1.getId()));
-        dataService.addProduct(new Product("Макароны", new BigDecimal(25), cat2.getId()));
+        ProductCategory cat3 = dataService.addCategory(new ProductCategory("Десерты", 1));
+
+        dataService.addProduct(new Product("Лагман", new BigDecimal(55), cat1.getId()));
+        dataService.addProduct(new Product("Гречка", new BigDecimal(25), cat2.getId()));
+        dataService.addProduct(new Product("Борщ", new BigDecimal(45), 1));
+        dataService.addProduct(new Product("Лазанья", new BigDecimal(100), 1));
+        dataService.addProduct(new Product("Рис", new BigDecimal(20), 1));
+
+        dataService.addProduct(new Product("Чай", new BigDecimal(25), 2));
+        dataService.addProduct(new Product("Кофе", new BigDecimal(25), 2));
+
         dataService.addProduct(new Product("Компот", new BigDecimal(20), cat1.getId()));
         dataService.addProduct(new Product("Сок", new BigDecimal(30), cat2.getId()));
+
+        dataService.addProduct(new Product("Тирамису", new BigDecimal(80), cat3.getId()));
+        dataService.addProduct(new Product("Чизкейк", new BigDecimal(75), cat3.getId()));
+        dataService.addProduct(new Product("Круассан", new BigDecimal(40), cat3.getId()));
     }
 
     @Test

@@ -17,7 +17,7 @@ import java.util.List;
 public class CashBoxService {
 
     @Autowired
-    private QrCodeSocketService socketService;
+    private SocketService socketService;
 
     @Autowired
     private QrCodeGenerator qrCodeGenerator;

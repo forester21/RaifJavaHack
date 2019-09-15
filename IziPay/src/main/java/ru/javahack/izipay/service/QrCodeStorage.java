@@ -14,7 +14,7 @@ import java.util.Map;
 public class QrCodeStorage {
 
     @Autowired
-    private QrCodeSocketService qrCodeSocketService;
+    private SocketService socketService;
 
     private static final String IMG_PATH = "img/";
     private static final String IN_PROGRESS_IMG = "in_progress.png";
@@ -36,11 +36,12 @@ public class QrCodeStorage {
 
     public void updateQrCodeByUserId(long userId, File qrCode) {
         files.put(userId, qrCode);
-        qrCodeSocketService.sendNotification();
+        socketService.sendNotificationToQR();
     }
 
     public void updateOrderDone(long userId) {
         files.put(userId, completedImage);
-        qrCodeSocketService.sendNotification();
+        socketService.sendNotificationToQR();
+        socketService.sendNotificationToCashBox();
     }
 }
