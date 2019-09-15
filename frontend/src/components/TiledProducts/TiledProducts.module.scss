@@ -1,0 +1,30 @@
+.tiled-products-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  .category {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100px;
+    margin-right: 20px;
+
+    &:hover {
+      border: 1px solid #69c0ff;
+    }
+  }
+
+  .product {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100px;
+    margin-right: 20px;
+
+    &:hover {
+      border: 1px solid #69c0ff;
+    }
+  }
+}

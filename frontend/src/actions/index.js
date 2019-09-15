@@ -35,6 +35,14 @@ export const deleteSelectedProduct = id => dispatch => {
   });
 };
 
+export const ADD_SELECTED_PRODUCT = 'ADD_SELECTED_PRODUCT';
+export const addSelectedProduct = id => dispatch => {
+  dispatch({
+    type: ADD_SELECTED_PRODUCT,
+    payload: id,
+  });
+};
+
 export const CHANGE_PRODUCT_COUNT = 'CHANGE_PRODUCT_COUNT';
 export const changeProductCount = (id, newValue) => dispatch => {
   dispatch({

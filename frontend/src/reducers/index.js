@@ -1,12 +1,10 @@
 import * as Actions from 'actions';
 import { remove, find } from 'lodash';
 
-import { selectedProducts as mock } from 'mocks';
-
 const initialState = {
   products: [],
   categories: [],
-  selectedProducts: mock,
+  selectedProducts: [],
   QRCodeUrl: null,
 };
 
@@ -35,6 +33,22 @@ export default (state = initialState, action) => {
       return {
         ...state,
         selectedProducts: restSelectedProducts,
+      };
+    }
+
+    case Actions.ADD_SELECTED_PRODUCT: {
+      const prod = find(state.products, ['id', action.payload]);
+      const newSelectedProduct = {
+        key: prod.id,
+        name: prod.name,
+        price: prod.price,
+        count: 1,
+        totalPrice: prod.price,
+      };
+
+      return {
+        ...state,
+        selectedProducts: [...state.selectedProducts, newSelectedProduct],
       };
     }
 

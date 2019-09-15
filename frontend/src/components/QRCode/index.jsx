@@ -32,7 +32,7 @@ class QRCode extends React.Component {
   render() {
     return (
       <div className={theme('container')}>
-        <img src={this.props.QRCodeUrl} alt="" />
+        <img src={this.props.QRCodeUrl} alt="" className={theme('image')} />
       </div>
     );
   }

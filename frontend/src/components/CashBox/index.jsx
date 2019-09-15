@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { requestGenerateQRCode } from 'actions';
 import SelectedProducts from 'components/SelectedProducts';
-
+import TiledProducts from 'components/TiledProducts';
 import thematize from 'lib/thematize';
 import styles from './CashBox.module.scss';
 
@@ -21,11 +21,11 @@ const CashBox = ({ requestGenerateQRCode }) => (
         <SelectedProducts />
       </div>
       <div className={theme('request-button-container')}>
-        <Button onClick={requestGenerateQRCode}>GET QR CODE</Button>
+        <Button onClick={requestGenerateQRCode}>GENERATE QR CODE</Button>
       </div>
     </div>
     <div className={theme('tiled-products-container')}>
-      FGHJKL
+      <TiledProducts />
     </div>
   </div>
 );
