@@ -12,5 +12,4 @@ public class IziPayApplicationTests {
     @Test
     public void contextLoads() {
     }
-
 }

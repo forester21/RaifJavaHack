@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Оплата заказа</title>
+    <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1 id="paymentAmount">К оплате:
+    <br/>
+    <a id="myButton" class="btn-gradient green large">Оплатить</a>
+</h1>
+<script type="text/javascript">
+    window.onload = function () {
+        document.getElementById("paymentAmount").childNodes[0].nodeValue = "К оплате: " + location.search.split('paymentAmount=')[1] + ' руб.';
+    };
+
+    document.getElementById("myButton").onclick = function () {
+        fetch('api/paymentDone?userId=' + location.search.split('userId=')[1]);
+        location.href = "/ok";
+    };
+</script>
+</body>
+</html>
