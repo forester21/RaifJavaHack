@@ -21,7 +21,7 @@ const IconWrapper = ({ id }) => {
 
 const columns = [
   {
-    title: 'Name',
+    title: 'Имя',
     dataIndex: 'name',
     render: text => {
       return {
@@ -33,11 +33,11 @@ const columns = [
     },
   },
   {
-    title: 'Price',
+    title: 'Цена',
     dataIndex: 'price',
   },
   {
-    title: 'Count',
+    title: 'Кол-во',
     dataIndex: 'count',
     render: (text, record) => (
       <InputNumber
@@ -47,7 +47,7 @@ const columns = [
     ),
   },
   {
-    title: 'Total',
+    title: 'Сумма',
     dataIndex: 'totalPrice',
   },
   {
@@ -67,7 +67,7 @@ const SelectedProducts = () => {
         columns={columns}
         dataSource={selectedProducts}
         size="small"
-        title={() => 'Selected items'}
+        title={() => 'Выбранные позиции'}
         pagination={false}
       />
     </div>

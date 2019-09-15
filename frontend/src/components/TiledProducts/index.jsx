@@ -1,18 +1,13 @@
 import * as React from 'react';
 import { useSelector, connect } from 'react-redux';
 import Card from 'antd/es/card';
-import { filter } from 'lodash';
+import { filter, find } from 'lodash';
 
 import thematize from 'lib/thematize';
 import { addSelectedProduct } from 'actions';
 import styles from './TiledProducts.module.scss';
 
 const theme = thematize(styles);
-
-const showTypes = {
-  products: 'products',
-  categories: 'categories',
-};
 
 const Category = ({ name, id, onClick }) => {
   const memoizedOnClick = React.useCallback(() => onClick(id), [id, onClick]);
@@ -45,31 +40,36 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const TiledProducts = ({ handleProductClick }) => {
-  const [showType, setShowType] = React.useState(showTypes.categories);
   const [selectedCategoryId, setCategoryId] = React.useState(null);
   const products = useSelector(state => state.products);
   const categories = useSelector(state => state.categories);
   const filteredProducts = filter(products, prod => prod.categoryId === selectedCategoryId);
-
+  const productsToRender = selectedCategoryId ? filteredProducts : products;
+  const selectedCategory  = find(categories, ['id', selectedCategoryId]);
+  const selectedCategoryName = selectedCategory ? selectedCategory.name : 'Все';
   const onCategoryClick = id => {
     setCategoryId(id);
-    setShowType(showTypes.products);
   };
 
   const onProductClick = id => {
-    setShowType(showTypes.categories);
     handleProductClick(id);
   };
 
   return (
     <div className={theme('tiled-products-container')}>
-      {showType === showTypes.categories
-        ? categories.map(cat => (
-            <Category name={cat.name} id={cat.id} key={cat.id} onClick={onCategoryClick} />
-          ))
-        : filteredProducts.map(prod => (
-            <Product {...prod} key={prod.id} onClick={onProductClick} />
-          ))}
+      <div className={theme('title')}>Categories</div>
+      <div className={theme('tiles')}>
+        {categories.map(cat => (
+          <Category name={cat.name} id={cat.id} key={cat.id} onClick={onCategoryClick} />
+        ))}
+        <Category name='Все' id={null} key={'sadt'} onClick={onCategoryClick} />
+      </div>
+      <div className={theme('title')}>{selectedCategoryName}</div>
+      <div className={theme('tiles')}>
+        {productsToRender.map(prod => (
+          <Product {...prod} key={prod.id} onClick={onProductClick} />
+        ))}
+      </div>
     </div>
   );
 };

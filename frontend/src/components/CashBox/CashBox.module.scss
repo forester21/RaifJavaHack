@@ -2,10 +2,14 @@
   display: flex;
 
   .selected-products-container {
-    width: 30%;
+    width: 350px;
+    min-width: 350px;
   }
 
-  .request-button-container {
+  .total-and-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     text-align: right;
     margin-top: 20px;
   }
