@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
@@ -32,5 +31,19 @@ public class Product {
         this.name = name;
         this.price = price;
         this.categoryId = categoryId;
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder("product {")
+                .append(id)
+                .append(",")
+                .append(name)
+                .append(",")
+                .append(price)
+                .append(",")
+                .append(categoryId)
+                .append("}")
+                .toString();
     }
 }

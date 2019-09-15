@@ -27,4 +27,16 @@ public class ProductCategory {
         this.name = name;
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder("category {")
+                .append(id)
+                .append(",")
+                .append(name)
+                .append(",")
+                .append(userId)
+                .append("}")
+                .toString();
+    }
 }

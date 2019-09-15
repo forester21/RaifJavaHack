@@ -11,6 +11,7 @@ import ru.javahack.izipay.pojo.Product;
 import ru.javahack.izipay.pojo.ProductCategory;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -24,23 +25,47 @@ public class MongoData {
     @Autowired
     DataService dataService;
 
-
     /**
      * Наполнение тестовыми данными
      */
     @Test
     @Ignore
     public void fillData() {
-        dataService.addCategory(new ProductCategory("Еда", 1));
-        dataService.addCategory(new ProductCategory("Напитки", 1));
-        dataService.addProduct(new Product("Лагман", new BigDecimal(55), 1));
-        dataService.addProduct(new Product("Гречка", new BigDecimal(25), 1));
-        dataService.addProduct(new Product("Компот", new BigDecimal(20), 2));
-        dataService.addProduct(new Product("Сок", new BigDecimal(30), 2));
+        ProductCategory cat1 = dataService.addCategory(new ProductCategory("Еда", 1));
+        ProductCategory cat2 = dataService.addCategory(new ProductCategory("Напитки", 1));
+        dataService.addProduct(new Product("Борщ", new BigDecimal(55), cat1.getId()));
+        dataService.addProduct(new Product("Макароны", new BigDecimal(25), cat2.getId()));
+        dataService.addProduct(new Product("Компот", new BigDecimal(20), cat1.getId()));
+        dataService.addProduct(new Product("Сок", new BigDecimal(30), cat2.getId()));
     }
 
     @Test
     public void get() {
         assertNotNull(dataService.getAllProducts(1).get(0).getName());
+    }
+
+    @Test
+    public void getProduct() {
+        Product product = dataService.getProduct(5);
+        assertNotNull(product);
+        System.out.println(product.toString());
+    }
+
+    @Test
+    public void getCategories() {
+        List<ProductCategory> categories = dataService.getAllCategories(1);
+        assertNotNull(categories.get(0));
+        for (ProductCategory pc: categories) {
+            System.out.println(pc.toString());
+        }
+    }
+
+    @Test
+    public void getProducts() {
+        List<Product> products = dataService.getAllProducts(2);
+        assertNotNull(products.get(0));
+        for (Product p: products) {
+            System.out.println(p.toString());
+        }
     }
 }

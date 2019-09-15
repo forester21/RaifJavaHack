@@ -12,10 +12,8 @@ import org.springframework.stereotype.Component;
 import ru.javahack.izipay.pojo.Product;
 import ru.javahack.izipay.pojo.ProductCategory;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
@@ -45,8 +43,13 @@ public class DataServiceImpl implements DataService {
     }
 
     public List<Product> getAllProducts(long userId) {
-        Query query = new Query(Criteria.where("userId").is(userId));
-        return mongoOperation.findAll(Product.class);
+        List<ProductCategory> categoriesForUser = getAllCategories(userId);
+        if (categoriesForUser.isEmpty())
+            return new LinkedList<>();
+
+        List<Long> categoriesId = categoriesForUser.stream().map(ProductCategory::getId).collect(Collectors.toList());
+        Query searchProducts = new Query(Criteria.where("categoryId").in(categoriesId));
+        return mongoOperation.find(searchProducts, Product.class);
     }
 
     public List<ProductCategory> getAllCategories(long userId) {
