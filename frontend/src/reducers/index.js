@@ -38,11 +38,23 @@ export default (state = initialState, action) => {
 
     case Actions.ADD_SELECTED_PRODUCT: {
       const prod = find(state.products, ['id', action.payload]);
+      const alreadySelectdProduct = find(state.selectedProducts, ['key', action.payload]);
+
+      if (alreadySelectdProduct) {
+        alreadySelectdProduct.count = alreadySelectdProduct.count + 1;
+        alreadySelectdProduct.totalPrice =
+          alreadySelectdProduct.totalPrice + alreadySelectdProduct.price;
+        return {
+          ...state,
+          selectedProducts: [...state.selectedProducts],
+        };
+      }
+
       const newSelectedProduct = {
         key: prod.id,
         name: prod.name,
         price: prod.price,
-        count: 1,
+        count: alreadySelectdProduct ? alreadySelectdProduct.count + 1 : 1,
         totalPrice: prod.price,
       };
 
