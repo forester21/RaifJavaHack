@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author FORESTER
@@ -24,6 +26,7 @@ public class QrCodeStorage {
     private File completedImage;
 
     private Map<Long, File> files = new HashMap<>();
+    private Map<Long, Lock> locks = new HashMap<>();
 
     public QrCodeStorage() {
         inProgressImage = new File(getClass().getClassLoader().getResource(IMG_PATH + IN_PROGRESS_IMG).getFile());
@@ -40,8 +43,19 @@ public class QrCodeStorage {
     }
 
     public void updateOrderDone(long userId) {
-        files.put(userId, completedImage);
-        socketService.sendNotificationToQR();
-        socketService.sendNotificationToCashBox();
+        Lock lock = locks.computeIfAbsent(userId, u -> new ReentrantLock());
+        lock.lock();  // block until condition holds
+        try {
+            files.put(userId, completedImage);
+            socketService.sendNotificationToQR();
+            socketService.sendNotificationToCashBox();
+            Thread.sleep(4000L);
+            files.put(userId, inProgressImage);
+            socketService.sendNotificationToQR();
+        } catch (InterruptedException e) {
+            // do nothing
+        } finally {
+            lock.unlock();
+        }
     }
 }
