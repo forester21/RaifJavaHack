@@ -1,0 +1,43 @@
+.tiled-products-container {
+  display: flex;
+  flex-direction: column;
+
+  .tiles {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+
+  .title {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+
+  .category {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+
+    &:hover {
+      border: 1px solid #69c0ff;
+    }
+  }
+
+  .product {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+
+    &:hover {
+      border: 1px solid #69c0ff;
+    }
+  }
+}

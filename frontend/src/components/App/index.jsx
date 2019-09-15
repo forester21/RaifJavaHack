@@ -13,20 +13,26 @@ import QRCode from 'components/QRCode';
 
 export const ReduxStore = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
-const App = () => (
-  <>
-    <Provider store={ReduxStore}>
-      <BrowserRouter>
-        <Route path="/" component={Logo} />
-        <Layout>
-          <Switch>
-            <Route exact path="/" component={CashBox} />
-            <Route path="/qr" component={QRCode} />
-          </Switch>
-        </Layout>
-      </BrowserRouter>
-    </Provider>
-  </>
-);
+const App = () => {
+  React.useEffect(() => {
+    document.title = 'Izi pay';
+  }, []);
+
+  return (
+    <>
+      <Provider store={ReduxStore}>
+        <BrowserRouter>
+          <Route path="/" component={Logo} />
+          <Layout>
+            <Switch>
+              <Route exact path="/" component={CashBox} />
+              <Route path="/qr" component={QRCode} />
+            </Switch>
+          </Layout>
+        </BrowserRouter>
+      </Provider>
+    </>
+  );
+};
 
 export default App;

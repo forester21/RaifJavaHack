@@ -4,6 +4,10 @@ import Stomp from 'stompjs';
 import { connect } from 'react-redux';
 
 import { getQRCode } from 'actions';
+import thematize from 'lib/thematize';
+import styles from './QRCode.module.scss';
+
+const theme = thematize(styles);
 
 const socket = new SockJS('http://10.91.6.103:8080/ws');
 
@@ -17,9 +21,7 @@ class QRCode extends React.Component {
   componentDidMount() {
     const stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
-      console.log('connected', frame);
-      stompClient.subscribe('/topic/test', greeting => {
-        console.log('message', greeting);
+      stompClient.subscribe('/topic/QR', greeting => {
         this.props.getQRCode();
       });
     });
@@ -29,8 +31,8 @@ class QRCode extends React.Component {
 
   render() {
     return (
-      <div>
-        <img src={this.props.QRCodeUrl} alt="" />
+      <div className={theme('container')}>
+        <img src={this.props.QRCodeUrl} alt="" className={theme('image')} />
       </div>
     );
   }
