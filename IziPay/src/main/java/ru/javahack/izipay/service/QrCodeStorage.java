@@ -1,5 +1,6 @@
 package ru.javahack.izipay.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -12,21 +13,34 @@ import java.util.Map;
 @Service
 public class QrCodeStorage {
 
-    private static final String DEFAULT_IMAGE_PATH = "img/no-qr-code.png";
+    @Autowired
+    private QrCodeSocketService qrCodeSocketService;
 
-    private File defaultImage;
+    private static final String IMG_PATH = "img/";
+    private static final String IN_PROGRESS_IMG = "in_progress.png";
+    private static final String DONE_IMG = "done.png";
+
+    private File inProgressImage;
+    private File completedImage;
 
     private Map<Long, File> files = new HashMap<>();
 
     public QrCodeStorage() {
-        defaultImage = new File(getClass().getClassLoader().getResource(DEFAULT_IMAGE_PATH).getFile());
+        inProgressImage = new File(getClass().getClassLoader().getResource(IMG_PATH + IN_PROGRESS_IMG).getFile());
+        completedImage = new File(getClass().getClassLoader().getResource(IMG_PATH + DONE_IMG).getFile());
     }
 
     public File getQrCodeByUserIdOrDefault(long userId) {
-        return files.containsKey(userId) ? files.get(userId) : defaultImage;
+        return files.containsKey(userId) ? files.get(userId) : inProgressImage;
     }
 
     public void updateQrCodeByUserId(long userId, File qrCode) {
         files.put(userId, qrCode);
+        qrCodeSocketService.sendNotification();
+    }
+
+    public void updateOrderDone(long userId) {
+        files.put(userId, completedImage);
+        qrCodeSocketService.sendNotification();
     }
 }

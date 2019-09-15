@@ -27,7 +27,6 @@ public class CashBoxService {
 
     public void submitOrder(List<CountOfProducts> products) {
         qrCodeGenerator.updateQrCode(countPaymentAmount(products));
-        socketService.sendNotification();
     }
 
     public BigDecimal countPaymentAmount(List<CountOfProducts> products){
