@@ -23,9 +23,17 @@ const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
+    render: text => {
+      return {
+        props: {
+          className: theme('product-name'),
+        },
+        children: text,
+      };
+    },
   },
   {
-    title: 'Single price',
+    title: 'Price',
     dataIndex: 'price',
   },
   {
@@ -39,7 +47,7 @@ const columns = [
     ),
   },
   {
-    title: 'Total price',
+    title: 'Total',
     dataIndex: 'totalPrice',
   },
   {

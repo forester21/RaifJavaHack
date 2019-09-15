@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+
+  .selected-products-container {
+    width: 30%;
+  }
+
+  .request-button-container {
+    text-align: right;
+    margin-top: 20px;
+  }
+
+  .tiled-products-container {
+    margin-left: 40px;
+  }
+}
