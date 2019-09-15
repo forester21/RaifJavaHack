@@ -77,3 +77,10 @@ export const getQRCode = () => dispatch => {
       });
     });
 };
+
+export const CLEAR_SELECTED_PRODUCTS = 'CLEAR_SELECTED_PRODUCTS';
+export const clearSelectedProducts = () => dispatch => {
+  dispatch({
+    type: CLEAR_SELECTED_PRODUCTS,
+  })
+}

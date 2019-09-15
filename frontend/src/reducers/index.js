@@ -76,6 +76,13 @@ export default (state = initialState, action) => {
       };
     }
 
+    case Actions.CLEAR_SELECTED_PRODUCTS: {
+      return {
+        ...state,
+        selectedProducts: [],
+      };
+    }
+
     case Actions.QR_CODE_LOADED: {
       return {
         ...state,

@@ -21,7 +21,7 @@ class QRCode extends React.Component {
   componentDidMount() {
     const stompClient = Stomp.over(socket);
     stompClient.connect({}, frame => {
-      stompClient.subscribe('/topic/test', greeting => {
+      stompClient.subscribe('/topic/QR', greeting => {
         this.props.getQRCode();
       });
     });
